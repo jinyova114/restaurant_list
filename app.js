@@ -14,8 +14,14 @@ app.use(express.static('public'))
 
 // set routes
 app.get('/', (req, res) => {
-  res.render('index', {restaurant: restaurantList.results})
+  res.render('index', { restaurant: restaurantList.results })
 })
+
+app.get('/restaurants/:restaurant_id', (req, res) => {
+  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+  res.render('show', { restaurant })
+})
+
 
 // listen and start server
 app.listen(port, () => {
